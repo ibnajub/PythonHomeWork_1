@@ -33,3 +33,25 @@ for line in f:  # для каждой строки в файле
     # print(udachno)
 
 f.close()  # закрытие файла
+
+
+# вариант саши
+import pathlib
+
+def filedata(file):
+    if pathlib.Path(file).exists():
+        with open(file) as f:
+            for line in f.readlines():
+                l = ''.join([x.strip() for x in line if x !=' '])
+                before, after = l.split(';')
+                sum_res = sum([int(x) for x in before])
+                if sum_res // int(len(before)) == int(after[0]) and sum_res % int(len(before)) == int(after[-1]):
+                    print(f'{before};{after} => true')
+                else:
+                    print(f'{before};{after} => false')
+    else:
+        file = input('File doesnt exist, Enter correct file name: ')
+        filedata(file)
+
+file = 'test.txt'
+filedata(file)

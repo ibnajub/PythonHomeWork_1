@@ -64,9 +64,9 @@ def shortener(string ):
     #         res +=  x
 
 
-    fun_i = lambda i: i[:6] + "*" if len(i) > 6 else i
-
+    # fun_i = lambda i: i[:6] + "*" if len(i) > 6 else i
     # return  ' '.join ( list( map(fun_i, string.split() ) ) )
+
     return  ' '.join ( [ ( (i[:6] + "*") if len(i) > 6 else i) for i in string.split()   ])
 
 
