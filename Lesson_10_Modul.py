@@ -19,14 +19,15 @@ def my_sum(list_of_numbers):
 
     Функция получает на вход массив чисел, должна вернуть сумму этих чисел.
     Не использовать встроенные функции суммирования.
-    
+
     """
     pass
     #  ...wite your code here
     import functools
-    return functools.reduce(lambda x, y: x+y , list_of_numbers )
+    return functools.reduce(lambda x, y: x + y, list_of_numbers)
 
-def shortener(string ):
+
+def shortener(string):
     """
     Function receives a long string with many words.
     It should return the same string, but words,
@@ -63,11 +64,10 @@ def shortener(string ):
     #     else:
     #         res +=  x
 
-
     # fun_i = lambda i: i[:6] + "*" if len(i) > 6 else i
     # return  ' '.join ( list( map(fun_i, string.split() ) ) )
 
-    return  ' '.join ( [ ( (i[:6] + "*") if len(i) > 6 else i) for i in string.split()   ])
+    return ' '.join([((i[:6] + "*") if len(i) > 6 else i) for i in string.split()])
 
 
 def compare_ends(words):
@@ -84,10 +84,10 @@ def compare_ends(words):
     """
     pass
     #  ...wite your code here
-    import functools
+    # import functools
     res = 0
     for word in words:
-        if len( word ) > 1 and  word[0]  == word[-1]:
-           res += 1
+        if len(word) > 1 and word[0] == word[-1]:
+            res += 1
 
     return res

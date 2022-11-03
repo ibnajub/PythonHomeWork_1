@@ -1,4 +1,4 @@
-import first_test
+import first_test1
 
 
 def cli_color(string, new=0, end=0, color='g'):
