@@ -30,8 +30,9 @@ SELECT * FROM gender;
       (CASE when gender = 'm' then  ', he '
           ELSE ', she '
       END)
-          || 'has email' || gender.email FROM gender;
+          || 'has email' || gender.email AS info FROM gender;
 
+                     info
 ----------------------------------------------
  This is Vasya, he has emailmmm@mmail.com
  This is Alex, he has emailmmm@gmail.com
@@ -66,7 +67,7 @@ SELECT 'We have '
           ||
            (CASE when gender = 'm' THEN  ' boys!'
           ELSE ' girls!'
-      END) as info
+      END) as "Gender information:"
 
 
     FROM gender
@@ -75,8 +76,8 @@ SELECT 'We have '
 
 
 
-       info
-------------------
+ Gender information:
+---------------------
  We have 4 boys!
  We have 3 girls!
 (2 строки)
@@ -85,11 +86,11 @@ SELECT 'We have '
 
 --------5. Получите результат:-------------Вар1 с inner join--------------------------
 
-SELECT name , Count( name)
+SELECT name , Count( name) AS words
 FROM vocabulary inner join word w on vocabulary.id = w.vocabulary_id
 GROUP BY name ;
 
-  name   | count
+  name   | words
 ---------+-------
  animals |    10
  school  |    10
@@ -100,11 +101,11 @@ GROUP BY name ;
 
 ------------------5. Получите результат:-------------Вар2 с left join---------------------------------------------------
 
-SELECT name , Count( w.word)
+SELECT name , Count( w.word) AS words
 FROM vocabulary left join word w on vocabulary.id = w.vocabulary_id
 GROUP BY name;
 
-    name     | count
+    name     | words
 -------------+-------
  animals     |    10
  school      |    10
