@@ -1,0 +1,5 @@
+
+2022-12-06 04:34:43.929187 | EmailAlreadyExistsException
+2022-12-06 04:36:56.058507 | EmailAlreadyExistsException
+2022-12-06 04:36:58.729773 | EmailAlreadyExistsException
+2022-12-06 04:37:02.238946 | EmailAlreadyExistsException
