@@ -1,0 +1,116 @@
+----------1. Создать таблицу со следующими данными:---------------------
+
+create database postgres_module;
+\c postgres_module;
+create table gender (id serial, name varchar(255), pwd varchar(255), email varchar(255), gender varchar(1) );
+
+insert into gender (id, name , pwd , email, gender) values
+('1' , 'Vasya'  , '21341234qwfsdf' , 'mmm@mmail.com'    , 'm') ,
+(  '2' , 'Alex'   , '21341234'       , 'mmm@gmail.com'    , 'm')      ,
+(  '3' , 'Alexey' , 'qq21341234Q'    , 'alexey@gmail.com' , 'm')      ,
+(  '4' , 'Helen'  , 'MarryMeeee'     , 'hell@gmail.com'   , 'f')      ,
+(  '5' , 'Jenny'  , 'SmakeMyb'       , 'eachup@gmail.com' , 'f')      ,
+(  '6' , 'Lora'   , 'burn23'         , 'tpicks@gmail.com' , 'f');
+
+SELECT * FROM gender;
+ id |  name  |       pwd       |      email       | gender
+----+--------+-----------------+------------------+--------
+  1 | Vasya  | 21341234qwfsdf  | mmm@mmail.com    | m
+  2 | Alex   | 21341234        | mmm@gmail.com    | m
+  3 | Alexey | qq21341234Q     | alexey@gmail.com | m
+  4 | Helen  | MarryMeeee      | hell@gmail.com   | f
+  5 | Jenny  | SmakeMyb        | eachup@gmail.com | f
+  6 | Lora   | burn23          | tpicks@gmail.com | f
+  7 | Vasya1 | 21341234qwfsdf1 | mmm@mmail.com1   | m
+
+добавил 7 строку для тестов
+
+--------2. Отобразить данные приведенного ниже вида, обратить внимание на he и she:-----------------------------------------------
+  SELECT 'This is ' || gender.name ||
+      (CASE when gender = 'm' then  ', he '
+          ELSE ', she '
+      END)
+          || 'has email' || gender.email AS info FROM gender;
+
+                     info
+----------------------------------------------
+ This is Vasya, he has emailmmm@mmail.com
+ This is Alex, he has emailmmm@gmail.com
+ This is Alexey, he has emailalexey@gmail.com
+ This is Helen, she has emailhell@gmail.com
+ This is Jenny, she has emaileachup@gmail.com
+ This is Lora, she has emailtpicks@gmail.com
+ This is Vasya1, he has emailmmm@mmail.com1
+(7 строк)
+
+для теста след  задания добвлена еще строка в конце
+
+
+-----------Ложим результат в другую таблицу --------------------------------------
+
+
+create table info_res  (info varchar(256) );
+create table Gender_information_res  (Gender_information varchar(256) );
+
+-----------------------------------------
+insert into gender_information_res
+SELECT 'This is ' || gender.name ||
+      (CASE when gender = 'm' then  ', he '
+          ELSE ', she '
+      END)
+          || 'has email ' || gender.email AS gender_information FROM gender ;
+
+
+--------3. Отобразить данные приведенного ниже вида:---------------------------------
+SELECT 'We have '
+          || Count( gender)
+          ||
+           (CASE when gender = 'm' THEN  ' boys!'
+          ELSE ' girls!'
+      END) as "Gender information:"
+
+
+    FROM gender
+
+    GROUP BY (gender);
+
+
+
+ Gender information:
+---------------------
+ We have 4 boys!
+ We have 3 girls!
+(2 строки)
+
+
+
+--------5. Получите результат:-------------Вар1 с inner join--------------------------
+
+SELECT name , Count( name) AS words
+FROM vocabulary inner join word w on vocabulary.id = w.vocabulary_id
+GROUP BY name ;
+
+  name   | words
+---------+-------
+ animals |    10
+ school  |    10
+ SF      |    10
+ human   |    10
+ nature  |    10
+(5 строк)
+
+------------------5. Получите результат:-------------Вар2 с left join---------------------------------------------------
+
+SELECT name , Count( w.word) AS words
+FROM vocabulary left join word w on vocabulary.id = w.vocabulary_id
+GROUP BY name;
+
+    name     | words
+-------------+-------
+ animals     |    10
+ school      |    10
+ animals1111 |     0
+ SF          |    10
+ human       |    10
+ nature      |    10
+(6 строк)
